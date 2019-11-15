@@ -1,6 +1,6 @@
 [fork]: https://help.github.com/assets/images/help/repository/fork_button.jpg "Github Fork"
 
-# MVCHovedopgave
+# MVC Hovedopgave
 Hovedopgave til Datamatiker
 
 # Workflow
@@ -89,4 +89,15 @@ For at gemme ændringerne i din personlige fork, skal du pushe dine commits:
 ```git
 git push
 ```
+
+# Pull Request
+
+For at merge dine ændringer mod master repo'et. 
+
+  * Fra master repo'et kan du enten trykke på <b>Make Pull Request</b> øverst til venstre, eller tryk på linket https://github.com/Tarkuen/MVCHovedopgave/pull/new/master 
+  * Tryk herefter på <b>Compare across forks</b>
+  * Herefter kan du vælge base repositoriet som 'MVC Hovedopgave' -> 'master'
+  * Head repositoriet er din personlige fork, og branchen er din personlige feature branch
+  * Indtast herefter en beskrivelse for ændringer, gerne feature og story ID.
+  * Tryk herefter <b>Create Pull Request</b> øverst til højre.
 
