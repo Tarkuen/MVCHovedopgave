@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+	<changeSet id="0.0.0:CREATE:EMAIL" author="Christoffer Grand Hansen" context="default">
+		<comment>Creating Email table</comment>
+		<createTable tableName="EMAIL">
+			<column name="EMAIL" type="varchar(100)">
+				<constraints nullable="false" primaryKey="true" primaryKeyName="PK_EMAIL" />
+			</column>
+            <column name="TIMESTAMP" type="timestamp">
+				<constraints nullable="false"/>
+			</column>
+			<column name="SUB_URL" type="varchar(255)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+		<rollback>
+			<dropTable tableName="EMAIL" />
+		</rollback>
+	</changeSet>
+
+    <changeSet id="0.0.0:CREATE:NOTES" author="Christoffer Grand Hansen" context="default">
+		<comment>Creating Notes table</comment>
+		<createTable tableName="NOTES">
+			<column name="EMAIL" type="varchar(100)">
+				<constraints nullable="false" primaryKey="true" primaryKeyName="PK_NOTE_EMAIL" />
+			</column>
+			<column name="TEXT" type="varchar(1000)">
+				<constraints nullable="false" />
+			</column>
+            <column name="TIMESTAMP" type="varchar(1000)">
+				<constraints nullable="false" />
+			</column>
+            <column name="FALGGED" type="boolean">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+		<rollback>
+			<dropTable tableName="NOTES" />
+		</rollback>
+	</changeSet>
+
+    <changeSet id="0.0.0:CREATE:DOMAINE" author="Christoffer Grand Hansen" context="default">
+		<comment>Creating domaine table</comment>
+		<createTable tableName="DOMAINE">
+			<column name="DOMAINE_URL" type="varchar(100)">
+				<constraints nullable="false" primaryKey="true" primaryKeyName="PK_DOMAINE_URL" />
+			</column>
+			<column name="TIMESTAMP" type="int">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+		<rollback>
+			<dropTable tableName="NOTES" />
+		</rollback>
+	</changeSet>
+
+</databaseChangeLog>
