@@ -94,7 +94,7 @@ git push
 
 For at merge dine ændringer mod master repo'et. 
 
-  * Fra master repo'et kan du enten trykke på <b>Make Pull Request</b> øverst til venstre, eller tryk på linket https://github.com/Tarkuen/MVCHovedopgave/pull/new/master 
+  * Fra master repo'et kan du enten trykke på <b>Make Pull Request</b> øverst til venstre, eller tryk på linket https://github.com/Tarkuen/MVCHovedopgave/pull/new/dev 
   * Tryk herefter på <b>Compare across forks</b>
   * Herefter kan du vælge base repositoriet som 'MVC Hovedopgave' -> 'master'
   * Head repositoriet er din personlige fork, og branchen er din personlige feature branch
