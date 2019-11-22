@@ -100,4 +100,3 @@ For at merge dine ændringer mod master repo'et.
   * Head repositoriet er din personlige fork, og branchen er din personlige feature branch
   * Indtast herefter en beskrivelse for ændringer, gerne feature og story ID.
   * Tryk herefter <b>Create Pull Request</b> øverst til højre.
-
