@@ -6,8 +6,11 @@ For at oprette det virtuelle miljø med de rigtige packages, har jeg lavet en en
 Ved endt udvikling og test, opretter man miljøet ved at skrive
 
 ```cmd
-cd .\MVCHovedopgave\scrapy
+cd \Hovedopgave\MVCHovedopgave\MVCHovedopgave\scrapy
+```
+
+```conda
 conda env create --file .\enviroment.yml
 conda activate scrapy_env
 conda list -n scrapy_env
-´´´
+```
