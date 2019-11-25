@@ -1,7 +1,7 @@
 import sys
 import os
 
-sys.path.append('C:/Users/Tarkuen/Python Projects/Hovedopgave/MVCHovedopgave/scrapy1/prot_82_scrapy')
+sys.path.append('C:/Users/Tarkuen/Python Projects/Hovedopgave/MVCHovedopgave/scrapy_mod/prot_82_scrapy')
 
 import prot_82_scrapy
 

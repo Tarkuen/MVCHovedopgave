@@ -1,5 +1,6 @@
 import scrapy as Scrapy
 import collections
+from os import path
 
 class PocSpider(Scrapy.Spider):
     name = 'spider1'
@@ -7,6 +8,7 @@ class PocSpider(Scrapy.Spider):
     def start_requests(self):
         #assert isinstance(urls, collections.Sequence)
         urls= [
+            'https://www.dr.dk/presse/kontakt',
             'https://www.prodata.dk/kontakt/adresse-og-medarbejdere/',
         ]
         for url in urls:
@@ -14,13 +16,20 @@ class PocSpider(Scrapy.Spider):
 
     def parse(self, response):
         page = response.url.split('/')[-1]
-        xpath_target="//a[@class= 'email']/@href"
+        xpath_target="//a[contains(@href,'@')]/@href"
+        # select = Scrapy.Selector(response=response)
+
+        # xpath_target="//a[@href*='mail]"
         select = Scrapy.Selector(response=response)
-       
 
         filename= 'output.txt'
-
-        with open(filename, 'w') as f:
+        
+        if path.isfile(filename):
+            mode='a'
+        else:
+            mode = 'w'
+        
+        with open(filename, mode) as f:
             for link in select.xpath(xpath_target).getall():
                 f.write(str(page)+' '+str(link ).strip('mailto:')+'\n')
 
