@@ -44,3 +44,10 @@ Invoke-WebRequest -Uri "https://chromedriver.storage.googleapis.com/78.0.3904.10
 Expand-Archive -Path "chromedriver_win32.zip" -DestinationPath "."
 ```
 Jeg har valgt et dir på C drevet, men det kan I naturligvis ændre så det passer til jeres system - Det berør kun New-Item og cd kommandoen.
+
+# Kør Scraperen
+
+```cmd
+cd MVCHovedopgave\scrapy\prot_82_scrapy
+scrapy crawl spider1
+```
