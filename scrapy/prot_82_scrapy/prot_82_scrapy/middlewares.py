@@ -6,7 +6,12 @@
 # https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
 from scrapy import signals
+from selenium import webdriver
+from scrapy.http import HtmlResponse
 
+options = webdriver.ChromeOptions()
+options.add_argument('headless')
+options.add_argument('window-size=1200x600')
 
 class Prot82ScrapySpiderMiddleware(object):
     # Not all methods need to be defined. If a method is not defined,
@@ -55,6 +60,7 @@ class Prot82ScrapySpiderMiddleware(object):
     def spider_opened(self, spider):
         spider.logger.info('Spider opened: %s' % spider.name)
 
+    
 
 class Prot82ScrapyDownloaderMiddleware(object):
     # Not all methods need to be defined. If a method is not defined,
@@ -78,6 +84,14 @@ class Prot82ScrapyDownloaderMiddleware(object):
         # - or return a Request object
         # - or raise IgnoreRequest: process_exception() methods of
         #   installed downloader middleware will be called
+        
+        webd = webdriver.Chrome(chrome_options=options, executable_path='C://chromedriver/chromedriver.exe')
+
+        with webd as driver:
+            driver.get(request.url)
+            response_body = driver.page_source
+            return HtmlResponse(url=driver.current_url, body=response_body, encoding='utf-8',request=request)
+
         return None
 
     def process_response(self, request, response, spider):
@@ -101,3 +115,4 @@ class Prot82ScrapyDownloaderMiddleware(object):
 
     def spider_opened(self, spider):
         spider.logger.info('Spider opened: %s' % spider.name)
+        
