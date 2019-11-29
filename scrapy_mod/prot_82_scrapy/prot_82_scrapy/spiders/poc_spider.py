@@ -7,9 +7,12 @@ class PocSpider(Scrapy.Spider):
 
     def start_requests(self):
         #assert isinstance(urls, collections.Sequence)
+        # urls= [
+        #     'https://www.dr.dk/presse/kontakt',
+        #     'https://www.prodata.dk/kontakt/adresse-og-medarbejdere/',
+        # ]
         urls= [
-            'https://www.dr.dk/presse/kontakt',
-            'https://www.prodata.dk/kontakt/adresse-og-medarbejdere/',
+           'https://webscraper.io/test-sites/e-commerce/allinone'
         ]
         for url in urls:
             yield Scrapy.Request(url=url,callback= self.parse)
