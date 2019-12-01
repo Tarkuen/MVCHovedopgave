@@ -19,7 +19,7 @@ Update commandoen, opdatere din database til den nyeste version som er tilføjet
 liquibase --defaultsFile=db.properties --changeLogFile=changelog-master.xml update
 ```
 ### Rollback Command
-Rollback commamndoen, giver dig mulighed for at rollback til en ældre version! <tag> er navnet på den gamle changelog gerne vil rollback til!
+Rollback commamndoen, giver dig mulighed for at rollback til en ældre version! "<tag>" er navnet på den gamle changelog gerne vil rollback til!
 ```
 liquibase --defaultsFile=db.properties --changeLogFile=changelog-master.xml rollback <tag>
 ```
