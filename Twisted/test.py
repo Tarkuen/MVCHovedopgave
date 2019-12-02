@@ -13,10 +13,6 @@ from twisted.web.resource import Resource
 
 import prot_82_scrapy
 
-# class PocServerFactory(http.HTTPFactory):
-#     def buildProtocol(self, addr):
-#         return PocServer()
-
 class PocServerResource(Resource):
     isLeaf=True
 
@@ -26,7 +22,6 @@ class PocServerResource(Resource):
     
     def render_GET(self, request):
         deferred = defer.Deferred()
-        #self.request=request
         deferred.addCallback(self.callback_crawl)
         deferred.addCallback(self.callback_render)
         #reactor.callLater(1, deferred.callback, "callback initiated")
@@ -45,47 +40,6 @@ class PocServerResource(Resource):
     def callback_crawl(self, result, *args):
         os.popen(self.command).read()
         return result
-
-
-
-# class PocServer(http.HTTPChannel):
-#     requestFactory=PocServerResource
-
-    # def __init__(self):
-    #     
-
-    # def dataReceived(self, data):
-    #     deferred = defer.Deferred()
-    #     log.msg('Data received {%s}' % data )
-
-    #     
-
-    #     os.popen(self.command).read()
-    #     reactor.callLater(1, deferred.callback, "File Callback")
-    #     deferred.addCallback(self.fileHandler)
-
-    #     #deferred.addErrback(sys.exit())
-
-    # def fileHandler(self, result):
-    #     with open('../scrapy_mod/prot_82_scrapy/output.json', 'r') as fil:
-    #         for l in fil.readlines():
-    #             self.transport.write(l.encode('utf-8'))
-    #         fil.close()
-    #     print(result)
-
-    # def connectionMade(self):
-    #     log.msg('Client connection from {}'.format(self.transport.getPeer()))
-        
-
-    # def connectionLost(self, reason):
-    #     log.msg('Lost connection because {}'.format(reason))
-
-# def main():
-#     log.startLogging(sys.stdout)
-#     log.msg('Start your engines...')
-#     reactor.listenTCP(16000, PocServerFactory())
-#     #reactor.connectTCP('127.0.0.1', 16000)
-#     reactor.run()
 
 def main():
     log.startLogging(sys.stdout)
