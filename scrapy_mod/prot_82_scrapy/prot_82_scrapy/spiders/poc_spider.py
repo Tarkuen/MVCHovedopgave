@@ -5,35 +5,37 @@ from os import path
 class PocSpider(Scrapy.Spider):
     name = 'spider1'
 
+    def __init__(self, url='', *args, **kwargs):
+        super(PocSpider, self).__init__(*args, **kwargs)
+        self.cURL = [url]  # py36
+        print(self.cURL)
+
     def start_requests(self):
-        #assert isinstance(urls, collections.Sequence)
-        # urls= [
-        #     'https://www.dr.dk/presse/kontakt',
-        #     'https://www.prodata.dk/kontakt/adresse-og-medarbejdere/',
-        # ]
-        urls= [
-           'https://webscraper.io/test-sites/e-commerce/allinone'
-        ]
-        for url in urls:
-            yield Scrapy.Request(url=url,callback= self.parse)
+        
+        for url in self.cURL:
+            yield Scrapy.Request(url=url, callback=self.parse)
 
     def parse(self, response):
-        page = response.url.split('/')[-1]
+        page = response.url.split('//')[1]
         xpath_target="//a[contains(@href,'@')]/@href"
         # select = Scrapy.Selector(response=response)
 
         # xpath_target="//a[@href*='mail]"
         select = Scrapy.Selector(response=response)
 
-        filename= 'output.txt'
+        filename= 'output.json'
         
         if path.isfile(filename):
             mode='a'
         else:
             mode = 'w'
         
-        with open(filename, mode) as f:
+        with open(filename, 'w') as f:
+            f.write('{')
             for link in select.xpath(xpath_target).getall():
-                f.write(str(page)+' '+str(link ).strip('mailto:')+'\n')
+                f.write('"result": [ "page" : "'+str(page)+'", \n "mail": '+str(link).strip('mailto:')+'", ] '+'\n')
+            
+            f.write('}')
+            f.close()
 
         self.log('poc complete saved in %s' % filename)
