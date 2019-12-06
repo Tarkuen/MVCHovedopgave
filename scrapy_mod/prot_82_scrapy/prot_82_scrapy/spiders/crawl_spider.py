@@ -1,25 +1,28 @@
 import scrapy as Scrapy
+from scrapy.spiders import Rule
+from scrapy.linkextractors import LinkExtractor
 import collections
-from os import path
 import json
+from os import path
 
-class PocSpider(Scrapy.Spider):
-    name = 'spider1'
+class PocSpider(Scrapy.spiders.CrawlSpider):
+    name = 'spider2'
 
-    def __init__(self, url='', *args, **kwargs):
+    def __init__(self, url='https://www.dr.dk/presse/kontakt', *args, **kwargs):
         super(PocSpider, self).__init__(*args, **kwargs)
-        self.cURL = [url]  # py36
-        print(self.cURL)
+        self.cURL = [url.strip("'")]  # py36
+        self.allowed_domains = [self.cURL[0].split('//')[1].split('/')[0]+'/']
+        self.start_urls = self.cURL
+        print(self.allowed_domains)
+        print(self.start_urls)
+        rules=(
+            Rule(LinkExtractor(), callback='parse_item', follow=True),
+        )
 
-    def start_requests(self):
-        
-        for url in self.cURL:
-            yield Scrapy.Request(url=url, callback=self.parse)
-
-    def parse(self, response):
+    def parse_item(self, response):
         page = response.url.split('//')[1]
         xpath_target="//a[contains(@href,'@')]/@href"
-        # select = Scrapy.Selector(response=response)
+        self.log('Parsing website')
 
         # xpath_target="//a[@href*='mail]"
         select = Scrapy.Selector(response=response)
