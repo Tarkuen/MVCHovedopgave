@@ -32,9 +32,9 @@ class PocSpider(Scrapy.Spider):
             mode = 'w'
         
         with open(filename, 'w') as f:
-            a = []
+            a = {}
             for link in select.xpath(xpath_target).getall():
-                a.append(str(link).strip('mailto:')+' : '+str(page))
+                a.update({str(link).strip('mailto:'):str(page)})
             f.write(json.dumps(a))
             f.close()
 
