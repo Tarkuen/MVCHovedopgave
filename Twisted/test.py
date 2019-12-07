@@ -17,10 +17,20 @@ class PocServerResource(Resource):
     isLeaf=True
 
     def __init__(self):
-        self.command = 'cd ../scrapy_mod/prot_82_scrapy && scrapy crawl spider1'
-        self.command = self.command + " -a url=https://www.dr.dk/presse/kontakt"
+        self.command = 'cd ../scrapy_mod/prot_82_scrapy && scrapy crawl'
+        # self.command = self.command + " -a url=https://www.dr.dk/presse/kontakt"
     
     def render_GET(self, request):
+        log.msg('*'*15)
+        for k in request.args:
+            tmp = k.decode('utf-8')
+            if tmp == 'target':
+                self.command += f" spider1 -a url={str(request.args[k][0], 'utf-8')}"
+            elif tmp == 'root':
+                scheme = str(request.args[k][0], 'utf-8').split('//')[0]
+                target = f"{scheme}//{str(request.args[k][0], 'utf-8').split('//')[1].split('/')[0]}"
+                log.msg(target)
+                self.command += f"spider2 -a url={target}"
         deferred = defer.Deferred()
         deferred.addCallback(self.callback_crawl)
         deferred.addCallback(self.callback_render)
