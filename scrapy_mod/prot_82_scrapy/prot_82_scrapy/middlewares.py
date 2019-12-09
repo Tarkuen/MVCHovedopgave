@@ -89,16 +89,13 @@ class Prot82ScrapyDownloaderMiddleware(object):
         # - or raise IgnoreRequest: process_exception() methods of
         #   installed downloader middleware will be called
         
-        
-        # webd = webdriver.Chrome(chrome_options=options, executable_path='C://chromedriver/chromedriver.exe')
-    
-        self.webd.get(request.url)
-        return HtmlResponse(url=self.webd.current_url, body=self.webd.page_source, encoding='utf-8',request=request)
-
         return None
 
     def process_response(self, request, response, spider):
         # Called with the response returned from the downloader.
+        if b'<script language="JavaScript">' in response.body:
+            self.webd.get(request.url)
+            return HtmlResponse(url=self.webd.current_url, body=self.webd.page_source, encoding='utf-8',request=request)
 
         # Must either;
         # - return a Response object

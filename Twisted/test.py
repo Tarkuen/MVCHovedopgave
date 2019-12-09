@@ -1,7 +1,8 @@
 import os
 import sys
 import json
-#sys.path.append('C:/Users/Tarkuen/Python Projects/Hovedopgave/MVCHovedopgave/scrapy_mod/prot_82_scrapy')
+sys.path.append('C:/Users/Tarkuen/Python Projects/Hovedopgave/MVCHovedopgave/scrapy_mod/prot_82_scrapy')
+import subprocess
 
 from twisted.python import log
 from twisted.internet import reactor, defer
@@ -16,21 +17,24 @@ from twisted.web.resource import Resource
 class PocServerResource(Resource):
     isLeaf=True
 
-    def __init__(self):
-        self.command = 'cd ../scrapy_mod/prot_82_scrapy && scrapy crawl'
-        # self.command = self.command + " -a url=https://www.dr.dk/presse/kontakt"
+    # def __init__(self):
+        
+    #     # self.command = self.command + " -a url=https://www.dr.dk/presse/kontakt"
     
     def render_GET(self, request):
+        command = 'cd ../scrapy_mod/prot_82_scrapy && scrapy crawl'
         log.msg('*'*15)
         for k in request.args:
             tmp = k.decode('utf-8')
             if tmp == 'target':
-                self.command += f" spider1 -a url={str(request.args[k][0], 'utf-8')}"
+                command += f" spider1 -a url={str(request.args[k][0], 'utf-8')}"
             elif tmp == 'root':
                 scheme = str(request.args[k][0], 'utf-8').split('//')[0]
                 target = f"{scheme}//{str(request.args[k][0], 'utf-8').split('//')[1].split('/')[0]}"
                 log.msg(target)
-                self.command += f"spider2 -a url={target}"
+                command += f" spider2 -a url={target}"
+        self.command=command
+        log.msg(self.command)
         deferred = defer.Deferred()
         deferred.addCallback(self.callback_crawl)
         deferred.addCallback(self.callback_render)
@@ -45,7 +49,7 @@ class PocServerResource(Resource):
         result.finish()
     
     def callback_crawl(self, result, *args):
-        os.popen(self.command).read()
+        subprocess.call(self.command, shell=True)
         return result
 
 def main():

@@ -24,18 +24,18 @@ class PocSpider(CrawlSpider):
 
     def parse_item(self, response):
         page = response.url.split('//')[1]
-        xpath_target="//a[contains(@href,'@')]/@href"
+        xpath_target="//a[contains(@href,'@')]"
         select = Scrapy.Selector(response=response)
         filename= 'output.json'
         if len(select.xpath(xpath_target).getall()) == 0:
             return None
         
-        if path.isfile(filename):
-            mode='a'
-        else:
-            mode = 'w'
-        
-        with open(filename, mode) as f:
+        # if path.isfile(filename):
+        #     mode='a'
+        # else:
+        #     mode = 'w'
+
+        with open(filename, 'a') as f:
             a = {}
             for link in select.xpath(xpath_target).getall():
                 a.update({str(link).strip('mailto:'):str(page)})
