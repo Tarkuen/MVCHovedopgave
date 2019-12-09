@@ -11,7 +11,8 @@ from scrapy.http import HtmlResponse
 
 options = webdriver.ChromeOptions()
 options.add_argument('headless')
-options.add_argument('window-size=1200x600')
+options.add_argument('window-size=800x600')
+
 
 class Prot82ScrapySpiderMiddleware(object):
     # Not all methods need to be defined. If a method is not defined,
@@ -67,6 +68,9 @@ class Prot82ScrapyDownloaderMiddleware(object):
     # scrapy acts as if the downloader middleware does not modify the
     # passed objects.
 
+    def __init__(self):
+        self.webd = webdriver.Chrome(chrome_options=options, executable_path='C://chromedriver/chromedriver.exe')
+
     @classmethod
     def from_crawler(cls, crawler):
         # This method is used by Scrapy to create your spiders.
@@ -85,17 +89,13 @@ class Prot82ScrapyDownloaderMiddleware(object):
         # - or raise IgnoreRequest: process_exception() methods of
         #   installed downloader middleware will be called
         
-        webd = webdriver.Chrome(chrome_options=options, executable_path='C://chromedriver/chromedriver.exe')
-
-        with webd as driver:
-            driver.get(request.url)
-            response_body = driver.page_source
-            return HtmlResponse(url=driver.current_url, body=response_body, encoding='utf-8',request=request)
-
         return None
 
     def process_response(self, request, response, spider):
         # Called with the response returned from the downloader.
+        if b'<script language="JavaScript">' in response.body:
+            self.webd.get(request.url)
+            return HtmlResponse(url=self.webd.current_url, body=self.webd.page_source, encoding='utf-8',request=request)
 
         # Must either;
         # - return a Response object
