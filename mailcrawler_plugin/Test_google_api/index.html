@@ -103,6 +103,16 @@
        * Print the names and majors of students in a sample spreadsheet:
        * https://docs.google.com/spreadsheets/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms/edit
        */
+      function getCookies(test){
+        var x = document.cookie;
+        if(x){
+          if(x.includes(test)){
+            console.log('yes: ' +x)
+          }else {
+            console.log('no: ' +x)
+          }
+        }
+      }
       function listMajors() {
         gapi.client.sheets.spreadsheets.values.get({
           spreadsheetId: '1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms',
@@ -116,6 +126,8 @@
               // Print columns A and E, which correspond to indices 0 and 4.
               appendPre(row[0] + ', ' + row[1] + ', ' + row[4]);
             }
+            document.cookie = range.values
+            getCookies('Alex')
           } else {
             appendPre('No data found.');
           }
@@ -124,6 +136,7 @@
         });
       }
 
+      
     </script>
 
     <script async defer src="https://apis.google.com/js/api.js"
