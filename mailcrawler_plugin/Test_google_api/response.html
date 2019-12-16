@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" type="text/css" href='./style.css'>
+    <title>Protendo Tab</title>
+  </head>
+  <body>
+    <h1>
+        Dummy Header
+    </h1>
+    <p>
+      This is an example paragraph. Anything in the <strong>body</strong> tag
+      will appear on the page, just like this <strong>p</strong> tag and its
+      contents.
+    </p>
+
+    <form method="GET" id="my_form"></form>
+
+    <table class='results'>
+      <tr id='rows'>
+        <th>E-mail</th>
+        <th>Page</th>
+        <th>Note</th>
+        <th>Blacklist</th>
+      </tr>
+    </table>
+
+    <script>
+      var query = window.location.search.substring(1);
+      //var decoded_q2 = JSON.parse(decodeURIComponent(query));
+      var decoded_q2 = {
+        a: 'somestring',
+        b: 'test',
+        c: 'yes'
+      };
+      
+      console.log(decoded_q2);
+      var table_rows = document.getElementById('rows');
+      for (var key of Object.keys(decoded_q2)) {
+        table_rows.insertAdjacentHTML('afterend', '<td>'+key+'</td> <td>'+decoded_q2[key]+'</td> <td><input id="note" class="note" type="text" form="my_form"></td> <td><input type="checkbox" name="blacklist" value="true" form="my_form">blacklist?</td><td><button id="submit" type="button" form="my_form" disabled>Submit</button></td>');
+      }
+
+      var notes = document.getElementsByClassName('note')
+      console.log(notes)
+      for (var i = 0; i < notes.length; i++) {
+        notes[i].addEventListener('click', function (){
+          console.log(this.value)
+        })
+      }
+
+      function s(){
+        var i=document.getElementById("note");
+        console.log(i.value)
+        if(i.value=="")
+            {
+            document.getElementById("submit").disabled=true;
+            }
+        else
+            document.getElementById("submit").disabled=false;
+      }
+  
+    </script>
+  </body>
+</html>
