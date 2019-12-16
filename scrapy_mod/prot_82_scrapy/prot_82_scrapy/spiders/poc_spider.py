@@ -1,6 +1,7 @@
 import scrapy as Scrapy
 import collections
 from os import path
+import re
 import json
 
 class PocSpider(Scrapy.Spider):
@@ -28,14 +29,14 @@ class PocSpider(Scrapy.Spider):
         # print(select.xpath(xpath_target).getall())
         # xpath_target="//a[contains(@href,'@')]/parent::p"
         # print(select.xpath(xpath_target).getall())
-        # xpath_target="//a[contains(@href,'@')]/ancestor::div/child::a | //a[contains(@href,'@')]/ancestor::div/child::p "
+        xpath_target="//a[contains(@href,'@')]/ancestor::div/child::a | //a[contains(@href,'@')]/ancestor::div/child::p "
         # print(select.xpath(xpath_target).getall())
         
         with open(filename, 'w') as f:
             a = {}
             for link in select.xpath(xpath_target).getall():
+                link= re.sub(r'(?:style\=)(?:.*)(?:\;\")' , "", link)
                 a.update({str(link).strip('mailto:'):str(page)})
-                # print(link.replace(r'(?:style\=)(?:.*)(?:\;\")', ""))
             f.write(json.dumps(a))
             f.close()
 

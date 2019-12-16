@@ -5,6 +5,7 @@ from scrapy.linkextractors import LinkExtractor
 import collections
 import json
 from os import path
+import re
 
 
 class PocSpider(CrawlSpider):
@@ -38,6 +39,7 @@ class PocSpider(CrawlSpider):
         with open(filename, 'a') as f:
             a = {}
             for link in select.xpath(xpath_target).getall():
+                link= re.sub(r'(?:style\=)(?:.*)(?:\;\")' , "", link)
                 a.update({str(link).strip('mailto:'):str(page)})
             f.write(json.dumps(a))
             f.close()
