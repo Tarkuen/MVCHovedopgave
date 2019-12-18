@@ -49,9 +49,9 @@ document.addEventListener("DOMContentLoaded", function() {
     
   })
 
-  document.getElementById('scan_key').addEventListener('click', function(){
-    console.log('scan key')
-  })
+  // document.getElementById('scan_key').addEventListener('click', function(){
+  //   console.log('scan key')
+  // })
 
 
 }, false);
