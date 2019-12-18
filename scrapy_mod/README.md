@@ -6,11 +6,11 @@ For at oprette det virtuelle miljø med de rigtige packages, har jeg lavet en en
 Ved endt udvikling og test, opretter man miljøet ved at skrive
 
 ```cmd
-cd \Hovedopgave\MVCHovedopgave\MVCHovedopgave\scrapy
+cd /Hovedopgave/MVCHovedopgave/MVCHovedopgave/scrapy
 ```
 
 ```conda
-conda env create --file .\enviroment.yml
+conda env create --file ./enviroment.yml
 conda activate scrapy_env
 conda list -n scrapy_env
 ```
@@ -38,8 +38,8 @@ Kræver <b>Powershell</b> som default følger med windows 10
 ### Windows Driver
 
 ```powershell
-New-Item -ItemType Directory -Path "C:\chromedriver\"
-cd "C:\chromedriver\"
+New-Item -ItemType Directory -Path "C:/chromedriver/"
+cd "C:/chromedriver/"
 Invoke-WebRequest -Uri "https://chromedriver.storage.googleapis.com/78.0.3904.105/chromedriver_win32.zip" -OutFile "chromedriver_win32.zip"
 Expand-Archive -Path "chromedriver_win32.zip" -DestinationPath "."
 ```
@@ -48,6 +48,6 @@ Jeg har valgt et dir på C drevet, men det kan I naturligvis ændre så det pass
 # Kør Scraperen
 
 ```cmd
-cd MVCHovedopgave\scrapy\prot_82_scrapy
+cd MVCHovedopgave/scrapy/prot_82_scrapy
 scrapy crawl spider1
 ```
