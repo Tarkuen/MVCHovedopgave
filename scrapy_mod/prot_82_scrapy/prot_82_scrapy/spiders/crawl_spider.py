@@ -39,7 +39,7 @@ class PocSpider(CrawlSpider):
         with open(filename, 'a') as f:
             a = {}
             for link in select.xpath(xpath_target).getall():
-                link= re.sub(r'(?:style\=)(?:.*)(?:\;\")' , "", link)
+                link= re.sub(r'(?:style/=)(?:.*)(?:/;/")' , "", link)
                 a.update({str(link).strip('mailto:'):str(page)})
             f.write(json.dumps(a))
             f.close()
