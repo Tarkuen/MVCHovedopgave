@@ -27,13 +27,14 @@
     <script>
       var query = window.location.search.substring(1);
       var decoded_q2 = JSON.parse(decodeURIComponent(query));
-      
       console.log(decoded_q2);
       var table_rows = document.getElementById('rows');
       for (var key of Object.keys(decoded_q2)) {
         table_rows.insertAdjacentHTML('afterend', '<td>'+key+'</td> <td>'+decoded_q2[key]+'</td>');
       }
-  
+
     </script>
   </body>
 </html>
+
+  
