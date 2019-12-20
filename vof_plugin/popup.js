@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function() {
       }
       else {
         loader.style.display="none";
-        chrome.tabs.create({'url': "C:/Users/Tarkuen/Python Projects/Hovedopgave/MVCHovedopgave/vof_plugin/response.html"+'?'+request_to_twisted.responseText}, function(tab) {
+        chrome.tabs.create({'url': "C:/Users/Tarkuen/Python Projects/Hovedopgave/chrome_plugin/testplugin/response.html"+'?'+decodeURI(request_to_twisted.responseText)}, function(tab) {
         });
       }
     }
@@ -64,7 +64,6 @@ document.addEventListener("DOMContentLoaded", function() {
   //   }
   //   console.log(current_url)
   //   request_to_twisted.send("COMMIT");
-
   // })
 
 
