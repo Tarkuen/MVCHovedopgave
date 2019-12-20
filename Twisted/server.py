@@ -16,6 +16,7 @@ class PocServerResource(Resource):
     isLeaf=True
     
     def render_GET(self, request):
+        
         command = 'cd ../scrapy_mod/prot_82_scrapy && scrapy crawl'
         if 'target' in map(lambda x: x.decode('utf-8'), request.args):
             command += f" spider1 -a url={str(request.args[b'target'][0], 'utf-8')}"
@@ -29,14 +30,14 @@ class PocServerResource(Resource):
         deferred.addCallback(self.callback_crawl)
         deferred.addCallback(self.callback_render)
         deferred.addErrback(self.errorcode_handler)
-        reactor.callInThread(deferred.callback, result=request)
+        cl= reactor.callInThread(deferred.callback, result=request)
+        request.notifyFinish().addErrback(self.request_closed,cl)
         
         return NOT_DONE_YET
         
     def callback_render(self, result):
         if hasattr(result,'resultcode'):
             log.msg(f"result errorcode: {result.returncode}")
-        print(result)
         with open('../scrapy_mod/prot_82_scrapy/output.json', 'r') as fil:
             line= fil.read().encode('utf-8')
         result.write(line)
@@ -54,6 +55,9 @@ class PocServerResource(Resource):
     def errorcode_handler(self,failure):
         # log.msg(f"Failure Object: {failure}")
         return 1
+    
+    def request_closed(self,err,call):
+        call.canceled()
 
 
 def main():
