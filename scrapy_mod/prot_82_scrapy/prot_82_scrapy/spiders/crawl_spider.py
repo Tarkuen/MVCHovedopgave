@@ -34,9 +34,18 @@ class PocSpider(CrawlSpider):
 
         with open(self.filename, 'w') as f:
             a = {}
+<<<<<<< HEAD
         for link in select.xpath(xpath_target).getall():
             link= re.sub(r'(?:style\=)(?:.*)(?:\;\")' , "", link)
             item=Email_Item(emailAddress=str(link).strip('mailto:'),emailPage=f"{page}")
             yield item
+=======
+            for link in select.xpath(xpath_target).getall():
+                link= re.sub(r'(?:style/=)(?:.*)(?:/;/")' , "", link)
+                a.update({str(link).strip('mailto:'):str(page)})
+            append.update(a)
+            json.dump(append, f)
+            f.close()
+>>>>>>> 41b8f88e34c5c65c3f9b9b04b8d5dfe1be1494b2
 
         self.log('emails appended to %s' % self.filename)
