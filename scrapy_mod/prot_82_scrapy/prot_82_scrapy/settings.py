@@ -22,14 +22,17 @@ NEWSPIDER_MODULE = 'prot_82_scrapy.spiders'
 ROBOTSTXT_OBEY = True
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
-#CONCURRENT_REQUESTS = 32
+CONCURRENT_REQUESTS = 80
+COOKIES_ENABLED = False
+RETRY_ENABLED = False
+#DOWNLOAD_TIMEOUT = 15
 
 # Configure a delay for requests for the same website (default: 0)
 # See https://docs.scrapy.org/en/latest/topics/settings.html#download-delay
 # See also autothrottle settings and docs
 #DOWNLOAD_DELAY = 3
 # The download delay setting will honor only one of:
-#CONCURRENT_REQUESTS_PER_DOMAIN = 16
+CONCURRENT_REQUESTS_PER_DOMAIN = 32
 #CONCURRENT_REQUESTS_PER_IP = 16
 
 # Disable cookies (enabled by default)
@@ -53,7 +56,7 @@ ROBOTSTXT_OBEY = True
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 DOWNLOADER_MIDDLEWARES = {
-   'prot_82_scrapy.middlewares.Prot82ScrapyDownloaderMiddleware': 543,
+   'prot_82_scrapy.middlewares.EmailMiddleWare': 543,
 }
 
 # Enable or disable extensions
@@ -64,9 +67,9 @@ DOWNLOADER_MIDDLEWARES = {
 
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    'prot_82_scrapy.pipelines.Prot82ScrapyPipeline': 300,
-#}
+ITEM_PIPELINES = {
+   'prot_82_scrapy.pipelines.Prot82ScrapyPipeline': 300,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html

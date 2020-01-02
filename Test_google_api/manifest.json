@@ -1,0 +1,22 @@
+{
+    "manifest_version": 2,
+ 
+    "name": "Click!", 
+    "description": "Mailcrawler Chrome extension.",
+    "version": "1.0",
+    "browser_action": {
+        "default_icon": "icon.png",
+        "default_popup": "index3.html",
+        "default_title": "Better Mailhunter"
+    },
+    "content_security_policy":"script-src 'self' https://apis.google.com 'sha256-3sKNXQIfgLk7YnAonOWtksYxbvKj/PAHwP1LGmvlQT0=' ; object-src 'self'; ",
+    "permissions": [
+        "activeTab",
+        "tabs",
+        "https://*.google.com/*",
+        "https://apis.google.com/*",
+        "http://localhost:16000",
+        "http://*/*",
+        "https://*/*"
+     ]
+}

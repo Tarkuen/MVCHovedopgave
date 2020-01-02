@@ -4,6 +4,8 @@ from os import path
 import re
 import json
 
+from prot_82_scrapy.items import Email_Item
+
 class PocSpider(Scrapy.Spider):
     name = 'spider1'
 
@@ -17,20 +19,38 @@ class PocSpider(Scrapy.Spider):
         for url in self.cURL:
             yield Scrapy.Request(url=url, callback=self.parse)
 
+    # def parse(self, response):
+
+    #     page = response.url.split('//')[1]
+    #     select = Scrapy.Selector(response=response)
+    #     if len(select.xpath(self.xpath_target).getall()) == 0:
+    #         with open(self.filename, 'w') as f:
+    #             page = "no emails"
+    #             f.write(page)
+    #         return None
+    #     xpath_target="//a[contains(@href,'@')]/ancestor::div/child::a | //a[contains(@href,'@')]/ancestor::div/child::p "
+        
+    #     with open(self.filename, 'w') as f:
+    #         a = {}
+    #         for link in select.xpath(xpath_target).getall():
+    #             link= re.sub(r'(?:style\=)(?:.*)(?:\;\")' , "", link)
+    #             a.update({str(link).strip('mailto:'):str(page)})
+    #         f.write(json.dumps(a))
+    #         f.close()
+
+    #     self.log('emails appended to %s' % self.filename)
+
+
     def parse(self, response):
         page = response.url.split('//')[1]
         select = Scrapy.Selector(response=response)
         if len(select.xpath(self.xpath_target).getall()) == 0:
-            self.log('no emails')
-            return None
+            item=Email_Item(emailAddress="no emails",emailPage=f"{page}")
+            return item
         xpath_target="//a[contains(@href,'@')]/ancestor::div/child::a | //a[contains(@href,'@')]/ancestor::div/child::p "
-        
-        with open(self.filename, 'w') as f:
-            a = {}
-            for link in select.xpath(xpath_target).getall():
-                link= re.sub(r'(?:style\=)(?:.*)(?:\;\")' , "", link)
-                a.update({str(link).strip('mailto:'):str(page)})
-            f.write(json.dumps(a))
-            f.close()
+        for link in select.xpath(xpath_target).getall():
+            link= re.sub(r'(?:style\=)(?:.*)(?:\;\")' , "", link)
+            item=Email_Item(emailAddress=str(link).strip('mailto:'),emailPage=f"{page}")
+            yield item
 
         self.log('emails appended to %s' % self.filename)

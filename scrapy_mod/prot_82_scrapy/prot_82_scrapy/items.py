@@ -8,7 +8,6 @@
 import scrapy
 
 
-class Prot82ScrapyItem(scrapy.Item):
-    # define the fields for your item here like:
-    # name = scrapy.Field()
-    pass
+class Email_Item(scrapy.Item):
+    emailAddress = scrapy.Field()
+    emailPage = scrapy.Field()

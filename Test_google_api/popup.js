@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function() {
       }
       else {
         loader.style.display="none";
-        chrome.tabs.create({'url': "C:/Users/Tarkuen/Python Projects/Hovedopgave/MVCHovedopgave/vof_plugin/response.html"+'?'+decodeURI(request_to_twisted.responseText)}, function(tab) {
+        chrome.tabs.create({'url': "C:/Users/Tarkuen/Python Projects/Hovedopgave/MVCHovedopgave/mailcrawler_plugin/Test_google_api/response.html"+'?'+request_to_twisted.responseText}, function(tab) {
         });
       }
     }
@@ -49,9 +49,9 @@ document.addEventListener("DOMContentLoaded", function() {
     
   })
 
-  // document.getElementById('scan_key').addEventListener('click', function(){
-  //   console.log('scan key')
-  // })
+  document.getElementById('scan_key').addEventListener('click', function(){
+    console.log('scan key')
+  })
 
 
 }, false);
