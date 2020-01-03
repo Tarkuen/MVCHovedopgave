@@ -3,7 +3,7 @@ from os import path
 import scrapy as Scrapy
 import collections, json, re
 
-from prot_82_scrapy.items import Email_Item
+from scrapy_project.items import Email_Item
 
 class TargetSpider(Scrapy.Spider):
     name = 'spider1'

@@ -10,3 +10,4 @@ dependencies:
   - pyOpenSSL=19.0.0
   - pip:
     - scrapy=1.8.0
+    - selenium=3.141.0

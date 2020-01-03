@@ -44,14 +44,13 @@ class ServerProtocol(Resource):
 
         """
 
-        command = 'cd ../scrapy_mod/prot_82_scrapy && scrapy crawl'
+        command = 'cd ../Scrapy/scrapy_project && scrapy crawl'
         print(f"Now Serving {request}")
 
         for k,v in self.spiders.items():
             if k in map(lambda x: x.decode('utf-8'), request.args):
                 try:
                     command += getattr(self, str(v))(spidername=str(v),key=k, request=request, encoding='utf-8')
-                    # cd ../scrapy_mod/prot_82_scrapy && scrapy crawl spider1 -a url=https://www.prodata.dk
                     self.command=command
                 except AssertionError:
                     pass
@@ -82,7 +81,7 @@ class ServerProtocol(Resource):
     def handleResponse(self,requestObj ):
         """  [[DESCRIPTION]]  """
 
-        with open('../scrapy_mod/prot_82_scrapy/output.json', 'r') as fil:
+        with open('../Scrapy/scrapy_project/output.json', 'r') as fil:
             line= fil.read().encode('utf-8')
         print(f'renderering: {requestObj}')
         try:
@@ -124,8 +123,8 @@ def main():
     reactor.run()
 
 if __name__ == "__main__":
-    if os.path.exists('../scrapy_mod/prot_82_scrapy/output.json')==False :
-        with open('../scrapy_mod/prot_82_scrapy/output.json', 'w') as f:
+    if os.path.exists('../Scrapy/scrapy_project/output.json')==False :
+        with open('../Scrapy/scrapy_project/output.json', 'w') as f:
             pass
 
     main()

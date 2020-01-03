@@ -1,1 +1,0 @@
-Jeg har kørt en 3 forskellige tutorials, men til det du skal lave er det nok smartest at bruge denne extension som udgangspunkt.

@@ -5,7 +5,7 @@ import scrapy as Scrapy
 from scrapy.spiders import CrawlSpider, Rule
 from scrapy.linkextractors import LinkExtractor
 
-from prot_82_scrapy.items import Email_Item
+from scrapy_project.items import Email_Item
 
 
 class RootSpider(CrawlSpider):

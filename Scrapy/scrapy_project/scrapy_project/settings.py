@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Scrapy settings for prot_82_scrapy project
+# Scrapy settings for scrapy_project project
 #
 # For simplicity, this file contains only settings considered important or
 # commonly used. You can find more settings consulting the documentation:
@@ -9,14 +9,14 @@
 #     https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = 'prot_82_scrapy'
+BOT_NAME = 'AWM_InternetSolutions Spider'
 
-SPIDER_MODULES = ['prot_82_scrapy.spiders']
-NEWSPIDER_MODULE = 'prot_82_scrapy.spiders'
+SPIDER_MODULES = ['scrapy_project.spiders']
+NEWSPIDER_MODULE = 'scrapy_project.spiders'
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = 'prot_82_scrapy (+http://www.yourdomain.com)'
+USER_AGENT = 'scrapy_project (+https://github.com/Tarkuen/MVCHovedopgave)'
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = True
@@ -50,13 +50,13 @@ CONCURRENT_REQUESTS_PER_DOMAIN = 32
 # Enable or disable spider middlewares
 # See https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 #SPIDER_MIDDLEWARES = {
-#    'prot_82_scrapy.middlewares.Prot82ScrapySpiderMiddleware': 543,
+#    'scrapy_project.middlewares.Prot82ScrapySpiderMiddleware': 543,
 #}
 
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 DOWNLOADER_MIDDLEWARES = {
-   'prot_82_scrapy.middlewares.EmailMiddleWare': 543,
+   'scrapy_project.middlewares.EmailMiddleWare': 543,
 }
 
 # Enable or disable extensions
@@ -68,7 +68,7 @@ DOWNLOADER_MIDDLEWARES = {
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-   'prot_82_scrapy.pipelines.Prot82ScrapyPipeline': 300,
+   'scrapy_project.pipelines.Prot82ScrapyPipeline': 300,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)

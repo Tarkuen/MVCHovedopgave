@@ -1,9 +1,44 @@
 [fork]: https://help.github.com/assets/images/help/repository/fork_button.jpg "Github Fork"
 
 # MVC Hovedopgave
-Hovedopgave til Datamatiker
+Hovedopgave til Datamatiker 2018/2019
 
-# Workflow
+# Dependencies
+
+## Packages
+Se <i>Enviroment.yml</i> : 
+
+  - python=3.7.1
+  - lxml=4.4.1
+  - parsel=1.5.2
+  - w3lib=1.21.0
+  - twisted=19.10.0
+  - cryptography=2.8
+  - pyOpenSSL=19.0.0
+  - scrapy=1.8.0
+  - selenium=3.141.0
+
+## Software
+  - Loaded Google Chrome Extension
+  <b>Remember to update response file location</b>. Since Google won't allow extensions to execute JS on extension-pages, 
+  you need an absolute reference to the file <i>Response.html</i>.
+
+  You can find it in <i> Popup.JS </i> under <i>Google_Chrome_Extension</i> on line 23 & 41
+
+## Use Project
+
+### Find e-mail adress
+  - Start Webserver
+  - Open Google Chrome
+  - Navigate to website
+  - Click plugin
+  - Choose an option and <b>do not change context of plugin</b>
+  - Plugin will open a new tab with found results
+
+
+
+
+# Development Workflow
 
 Når man skal starte på en ny feature, er det vigtigt at vi følger denne process:
 
