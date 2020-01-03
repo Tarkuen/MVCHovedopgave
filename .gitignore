@@ -8,6 +8,9 @@
 *.user
 *.userosscache
 *.sln.docstates
+output.*
+*.pem
+*.crx
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
@@ -30,7 +33,7 @@ bld/
 #wwwroot/
 
 # Visual Studio 2017 auto generated files
-Generated\ Files/
+Generated/ Files/
 
 # MSTest test Results
 [Tt]est[Rr]esult*/

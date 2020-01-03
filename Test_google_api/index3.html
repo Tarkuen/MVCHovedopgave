@@ -1,0 +1,41 @@
+<html>
+  <head>
+    <script src="https://apis.google.com/js/api.js"></script>
+    <script>
+      function start() {
+        // Initializes the client with the API key and the Translate API.
+        gapi.client.init({
+          'apiKey': 'AIzaSyDaTbd-yubON4SbDRzoC9WSPEtqn0aPOQo',
+          'discoveryDocs': ['https://sheets.googleapis.com/$discovery/rest?version=v4'],
+        }).then(function() {
+          // Executes an API request, and returns a Promise.
+          // The method name `language.translations.list` comes from the API discovery.
+        //   return gapi.client.language.translations.list({
+        //     q: 'hello world',
+        //     source: 'en',
+        //     target: 'de',
+        //   });
+        var result = sheets.spreadsheets.values.get(
+            {
+                spreadsheetId: '1QNYRLLzh-0qa2ZD2PvIxgL2LzCrbTbuN3ON7k-9ID4M',
+                range: 'Class Data!A2:E',
+            }
+        );
+        console.log('result')
+        return result
+        }).then(function(response) {
+          console.log(result);
+          console.log(response);
+        }, function(reason) {
+        //   console.log('Error: ');
+        });
+      };
+
+      // Loads the JavaScript client library and invokes `start` afterwards.
+      gapi.load('client', start);
+    </script>
+  </head>
+  <body>
+    <div id="results"></div>
+  </body>
+</html>
