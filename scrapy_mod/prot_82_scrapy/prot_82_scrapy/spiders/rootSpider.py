@@ -27,7 +27,7 @@ class RootSpider(CrawlSpider):
         select = Scrapy.Selector(response=response)
         
         if len(select.xpath(self.xpath_target).getall()) == 0:
-            item=Email_Item(emailAddress="no emails",emailPage=f"{page}")
+            item=Email_Item(emailAddress="no emails",emailPage=f"{response.url.split('//')[1]}")
             return item
         self.xpath_target="//a[contains(@href,'@')]/ancestor::div/child::a | //a[contains(@href,'@')]/ancestor::div/child::p "
 

@@ -27,7 +27,7 @@ class TargetSpider(Scrapy.Spider):
         xpath_target="//a[contains(@href,'@')]/ancestor::div/child::a | //a[contains(@href,'@')]/ancestor::div/child::p "
         for link in select.xpath(xpath_target).getall():
             link= re.sub(r'(?:style\=)(?:.*)(?:\;\")' , "", link)
-            item=Email_Item(emailAddress=str(link).strip('mailto:'),emailPage=f"{page}")
+            item=Email_Item(emailAddress=str(link).strip('mailto:'),emailPage=f"{response.url.split('//')[1]}")
             yield item
 
         self.log('emails appended to %s' % self.filename)
