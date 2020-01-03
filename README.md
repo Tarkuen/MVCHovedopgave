@@ -25,6 +25,13 @@ Se <i>Enviroment.yml</i> :
 
   You can find it in <i> Popup.JS </i> under <i>Google_Chrome_Extension</i> on line 23 & 41
 
+
+  - Selenium Webdriver
+  You can find instructions on how to install and place this webdriver in an appropriate location
+  under the <b>Scrapy</b> folders README.md
+  In the current state it is required to be placed on a 'C://' drive, given we've developed on a <b>Windows Enviroment</b>.
+  
+
 ## Use Project
 
 ### Find e-mail adress
@@ -34,8 +41,6 @@ Se <i>Enviroment.yml</i> :
   - Click plugin
   - Choose an option and <b>do not change context of plugin</b>
   - Plugin will open a new tab with found results
-
-
 
 
 # Development Workflow

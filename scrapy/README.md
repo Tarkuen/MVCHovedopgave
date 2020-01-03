@@ -31,6 +31,13 @@ Derfor kræver det Chrome version 78 for at køre scraperen og den installeres p
 
 Efter installationen, kræver det en driver til chrome.
 
+# Mac
+
+In it's current form, you cannot use our software on a MacOS or any non-windows distribution.
+This is still to be scheduled for a fix in an upcoming release
+
+
+# Windows 
 ## Driver installation
 
 Kræver <b>Powershell</b> som default følger med windows 10
