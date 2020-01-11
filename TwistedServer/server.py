@@ -1,10 +1,4 @@
-import os
-import sys
-import json
-import subprocess
-import config
-import time
-import asyncio
+import os, sys, json, subprocess, config, time, asyncio
 
 from twisted.python import log
 from twisted.internet import reactor, defer, threads
@@ -14,7 +8,6 @@ from twisted.internet.protocol import ServerFactory, ClientFactory, Protocol
 from twisted.web.server import Request
 from twisted.web.server import Site, NOT_DONE_YET
 from twisted.web.resource import Resource
-
 
 class ServerProtocol(Resource):
     """
@@ -34,27 +27,24 @@ class ServerProtocol(Resource):
 
     def __init__(self):
         super(Resource).__init__()
+        self.command='cd ../Scrapy/scrapy_project && scrapy crawl'
         conf = config.Config()
         self.spiders = conf.getConfig()
 
-    
     def render_GET(self, request):
         """
         [[DESCRIPTION]]
 
         """
-
-        command = 'cd ../Scrapy/scrapy_project && scrapy crawl'
+        self.command = 'cd ../Scrapy/scrapy_project && scrapy crawl'
         print(f"Now Serving {request}")
 
         for k,v in self.spiders.items():
             if k in map(lambda x: x.decode('utf-8'), request.args):
                 try:
-                    command += getattr(self, str(v))(spidername=str(v),key=k, request=request, encoding='utf-8')
-                    self.command=command
+                    self.command += getattr(self, str(v))(spidername=str(v),key=k, request=request, encoding='utf-8')
                 except AssertionError:
                     pass
-
 
         d = defer.Deferred()
         proc = subprocess.Popen(self.command, stdout=subprocess.PIPE, shell=True)
@@ -63,9 +53,7 @@ class ServerProtocol(Resource):
         d.callback(request)
         request.notifyFinish().addErrback(self.requestHangUp,request)
 
-        # crawl = defer.ensureDeferred(self.callback_crawl(d))
-        # # d.addErrback(self.errorcode_handler)
-        # d.callback(request)
+
         return NOT_DONE_YET
 
     def recieveRequest(self, requestObj):
