@@ -25,7 +25,7 @@ Denne fil følger Key/Value JSON strukturen, hvilket minder om en python diction
 <i>Key</i> er navnet på det keyword, som query strengen skal anvende.
 <i>Value</i> er det tilhørende Python script, der skal håndtere instruktionen.
 
-### Twisted Instruktioner
+### Extend Twisted Instruktioner
 
 For at håndtere et query string keyword, skal man først definere det i Config.json.
 Herefter skal man lægge et Python script i kataloget: <i>Commands</i>.
@@ -34,9 +34,3 @@ Herefter skal man lægge et Python script i kataloget: <i>Commands</i>.
 
 <b>" SPIDERNAME -a url=STARTURL-ADDRESS "</b>
 Eksempelvis: " spider1 -a url=https://www.dr.dk "
-
-## Extend the Server
-
-
-
-
