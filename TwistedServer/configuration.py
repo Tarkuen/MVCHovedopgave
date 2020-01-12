@@ -1,5 +1,5 @@
 import json
-class Config:
+class Config():
 
     def __init__(self):
         self.spiders={}
