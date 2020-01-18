@@ -1,4 +1,1 @@
-{
-    "target":"spider1",
-    "root":"spider2"
-}
+{"t": {"targetSpider": "targetSpider.py"}, "r": {"rootSpider": "rootSpider.py"}}

@@ -7,7 +7,6 @@
 
 import scrapy
 
-
 class Email_Item(scrapy.Item):
     emailAddress = scrapy.Field()
     emailPage = scrapy.Field()

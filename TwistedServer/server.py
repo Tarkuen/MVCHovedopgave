@@ -1,5 +1,6 @@
 import os, sys, json, subprocess,  time, asyncio
 from importlib import import_module
+from init_test import create_test
 
 from twisted.python import log
 from twisted.internet import reactor, defer, threads
@@ -40,18 +41,19 @@ class ServerProtocol(Resource):
         super(Resource).__init__()
         self.command='cd ../Scrapy/scrapy_project && scrapy crawl'
         conf = config.Config()
+        setattr(conf,'config_dir','config.json' )
         self.spiders = conf.getConfig()
 
     def render_GET(self, request):
-
         command = 'cd ../Scrapy/scrapy_project && scrapy crawl'
         print(f"Now Serving {request}")
 
         for k,v in self.spiders.items():
             if k in map(lambda x: x.decode('utf-8'), request.args):
                 try:
-                    mod_class= getattr(import_module(f'commands.{str(v)}'), f'{str(v)}')
-                    command += getattr(mod_class, f'{str(v)}')(mod_class,spidername=str(v),key=k, request=request, encoding='utf-8')
+                    spidername = list(v.keys())[0]
+                    mod_class= getattr(import_module(f'commands.{str(spidername)}'), f'{str(spidername)}')
+                    command += getattr(mod_class, f'{str(spidername)}')(mod_class,spidername=str(spidername),key=k, request=request, encoding='utf-8')
                 except Exception:
                     log.msg(f'Module not found. Check config.json for appropriate keywords')
 
@@ -62,22 +64,23 @@ class ServerProtocol(Resource):
             return 1
 
         d = defer.Deferred()
-        proc = subprocess.Popen(command, stdout=subprocess.PIPE, shell=True)
-        request.processID=proc
+        # proc = subprocess.Popen(command, stdout=subprocess.PIPE, shell=True)
+        request.processID=subprocess.Popen(command, stdout=subprocess.PIPE, shell=True)
         d.addCallback(self.recieveRequest)
-        d.callback(request)
         request.notifyFinish().addErrback(self.requestHangUp,request)
+        d.callback(request)
 
         return NOT_DONE_YET
 
     def recieveRequest(self, requestObj):
 
         if requestObj.processID.poll() is None:
-            return deferLater(reactor, 5,self.recieveRequest, requestObj)
+            return deferLater(reactor, 2,self.recieveRequest, requestObj)
         else:
-            d = defer.Deferred()
-            d.addCallback(self.handleResponse)
-            d.callback(requestObj)
+            self.handleResponse(requestObj)
+            # d = defer.Deferred()
+            # d.addCallback(self.handleResponse)
+            # d.callback(requestObj)
 
     def handleResponse(self,requestObj ):
 
@@ -97,15 +100,13 @@ class ServerProtocol(Resource):
         item.processID.kill()
         print(f"Request Closed on {item}. Error is : {err}")
 
-def main():
-    log.startLogging(sys.stdout)
-    log.msg('Twisted TCP Server Openened on port: 16000')
-    reactor.listenTCP(16000, Site(ServerProtocol()))
-    reactor.run()
-
 if __name__ == "__main__":
-    if os.path.exists('../Scrapy/scrapy_project/output.json')==False :
-        with open('../Scrapy/scrapy_project/output.json', 'w') as f:
-            pass
+    def main():
+        log.startLogging(sys.stdout)
+        log.msg('Twisted TCP Server Openened on port: 16000')
+        reactor.listenTCP(16000, Site(ServerProtocol()))
+        reactor.run()
 
+    create_test()
     main()
+    

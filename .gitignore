@@ -11,6 +11,7 @@
 output.*
 *.pem
 *.crx
+test.py
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs

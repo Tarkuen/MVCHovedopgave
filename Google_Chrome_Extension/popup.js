@@ -9,7 +9,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
   var loader = document.getElementById('container2');
 
-    
   document.getElementById('scan_one').addEventListener('click', function(){
     console.log('scan one')
     loader.style.display="block";
@@ -47,3 +46,14 @@ document.addEventListener("DOMContentLoaded", function() {
     
   })
 });
+
+// var img_topdom = String(Math.floor(Math.random() * 100))
+// var elem = document.getElementById('uniqueId');
+// red = Math.floor(Math.random()*255)
+// green = Math.floor(Math.random()*255)
+// blue = Math.floor(Math.random()*255)
+// var colourstring = 'rgb('+red+', '+green+', '+blue+')'
+// elem.style.backgroundColor = colourstring
+// elem.style.height ='50px'
+// elem.style.width = '50px'
+
