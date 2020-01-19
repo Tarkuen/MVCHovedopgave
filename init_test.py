@@ -18,7 +18,6 @@ class SystemInitTest(TestCase):
 
     def confTestCase(self):
         """ Does conf.json exist? """
-        print(os.getcwd())
         self.assertTrue(os.path.exists(os.getcwd()+self.config_file))
     
     def outputTestCase(self):

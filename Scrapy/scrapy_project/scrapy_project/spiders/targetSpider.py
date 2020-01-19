@@ -18,7 +18,7 @@ class TargetSpider(Scrapy.Spider):
             Name of spider for command line execution
 
     """
-    name = 'targetSpider'
+    name = 'CheckSite'
 
     def __init__(self, url='', *args, **kwargs):
         super(TargetSpider, self).__init__(*args, **kwargs)

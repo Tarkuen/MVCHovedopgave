@@ -1,6 +1,6 @@
-class rootSpider():
+class CheckDomain():
 
-    def rootSpider(self,spidername,key,request,encoding):
+    def CheckDomain(self,spidername,key,request,encoding):
         # url= ['https:', '', 'dr.dk', 'presse','kontakt']
         k = list(request.args.keys())[0]
         url = str(request.args[k][0], f"'{encoding}'").split('/')

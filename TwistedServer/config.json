@@ -1,1 +1,1 @@
-{"t": {"targetSpider": "targetSpider.py"}, "r": {"rootSpider": "rootSpider.py"}}
+{"domain": {"CheckDomain": "rootSpider.py"}, "check": {"CheckSite": "targetSpider.py"}}

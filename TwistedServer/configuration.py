@@ -7,6 +7,7 @@ class Config():
         self.config_dir  = 'TwistedServer/config.json'
         self.command_dir = 'TwistedServer/commands'
         self.spiders_dir = 'Scrapy/scrapy_project/scrapy_project/spiders'
+        self.output_dir  = '../Scrapy/scrapy_project/output.json'
 
     def getConfig(self):
         with open(self.config_dir, 'r') as f:
@@ -27,3 +28,11 @@ class Config():
         temp = set([])
         [ temp.add(entry) for entry in files if re.match(r'(__.*__.py)|(__.*__)', entry) ]
         return set.symmetric_difference(files, temp)
+
+    def getOutputFile(self):
+        assert type(self.output_dir)==str
+        return self.output_dir
+    
+    def getConfigDir(self):
+        assert type(self.config_dir)==str
+        return self.config_dir
