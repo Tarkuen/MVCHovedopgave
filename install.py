@@ -8,10 +8,11 @@ class InstallProject():
         self.conf = Config()
         self.config_file = self.conf.getConfigDir()
 
-    def replace_name(self, name_to_insert,target_file):
-        name_to_insert = " name = '"+name_to_insert+"'\n"
+    def replace_name(self, names_and_files):
+        name, fil = names_and_files[0]
+        name_to_insert = " name = '"+name+"'\n"
         regex = r"(\sname = (?:.*)'\n)"
-        for line in fileinput.input('Scrapy/scrapy_project/scrapy_project/spiders/'+target_file, inplace=True):
+        for line in fileinput.input('Scrapy/scrapy_project/scrapy_project/spiders/'+fil, inplace=True):
             line = re.sub(regex,name_to_insert,line, 1) if re.search(regex,line) else line
             print(line, end='')
         fileinput.close()
@@ -33,7 +34,8 @@ class InstallProject():
             else:
                 result.update({value:{command.strip('.py'):spidername}})
 
-        [[self.replace_name(f'{j}', f'{k}') for (j,k) in i.items()] for i in result.values()]
+        [ self.replace_name([(j,k) for (j,k) in i.items() ]) for i in result.values() ]
+
         with open(self.config_file, 'w') as f:
             json.dump(result,f)
 
