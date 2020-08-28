@@ -9,7 +9,7 @@ from scrapy_project.items import Email_Item
 
 
 class RootSpider(CrawlSpider):
-    name = 'spider2'
+    name = 'CheckDomain'
     rules=[
             Rule(LinkExtractor(allow=(r'/*')), callback='parse_item', follow=True),
         ]

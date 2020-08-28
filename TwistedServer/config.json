@@ -1,4 +1,1 @@
-{
-    "target":"spider1",
-    "root":"spider2"
-}
+{"domain": {"CheckDomain": "rootSpider.py"}, "check": {"CheckSite": "targetSpider.py"}}
